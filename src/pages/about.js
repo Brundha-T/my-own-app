@@ -1,7 +1,6 @@
 export default function About() {
   return (
     <div className="min-h-screen flex flex-col font-sans">
-      {/* Header - Black */}
       <header className="bg-black flex justify-between items-center px-6 py-4">
         <div className="text-2xl font-bold text-amber-300 tracking-wide">RateMyRoutine</div>
         <nav className="space-x-4 text-white font-semibold">
@@ -10,7 +9,6 @@ export default function About() {
         </nav>
       </header>
 
-      {/* Main Content Area - Dark Gradient Full Height */}
       <section className="flex flex-wrap flex-grow p-10 gap-8 bg-gradient-to-br from-zinc-800 to-zinc-900 text-white min-h-screen">
         <div className="flex-1 min-w-[300px] p-4">
           <h1 className="text-4xl font-bold text-amber-300 mb-6">About Us</h1>

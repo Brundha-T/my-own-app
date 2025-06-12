@@ -9,7 +9,6 @@ export default function Dashboard() {
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
 
-  // Load tasks from sessionStorage on mount
   useEffect(() => {
     const storedTasks = JSON.parse(sessionStorage.getItem('tasks')) || [];
     setTasks(storedTasks);
@@ -40,7 +39,6 @@ export default function Dashboard() {
         RateMyRoutine Dashboard
       </h1>
 
-      {/* Task Input Section */}
       <div className="flex flex-col items-center gap-2 mb-6">
         <div className="flex gap-2 items-center flex-wrap justify-center">
           <input
@@ -71,14 +69,12 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Task List */}
       <ul className="text-center mb-4">
         {tasks.map((task, index) => (
           <li key={index} className="text-lg">{task}</li>
         ))}
       </ul>
 
-      {/* View Score Button */}
       <div className="text-center my-6">
         <a href="/score">
           <button className="px-6 py-3 bg-gradient-to-r from-pink-500 to-orange-400 rounded-full font-bold text-white text-lg">
@@ -87,7 +83,6 @@ export default function Dashboard() {
         </a>
       </div>
 
-      {/* Motivation Form with Comments */}
       <MotivationForm tasks={tasks} />
     </div>
   );

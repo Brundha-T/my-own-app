@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import GoalTrackerForm from '../components/GoalTrackerForm';
+import ChatForm from '../components/ChatForm';
 
 export default function Score() {
   const [score, setScore] = useState(0);
@@ -26,7 +27,7 @@ export default function Score() {
 
   return (
     <div
-      className="min-h-screen flex flex-col items-center justify-center text-white px-4 py-10"
+      className="min-h-screen flex flex-col items-center justify-start text-white px-4 py-10 gap-12"
       style={{
         backgroundImage: "url('https://wallpapercave.com/wp/wp2175326.jpg')",
         backgroundSize: 'cover',
@@ -35,27 +36,28 @@ export default function Score() {
     >
       <div className="absolute inset-0 bg-black opacity-60 -z-10" />
 
-      {/* Side-by-side layout */}
-      <div className="flex flex-col md:flex-row gap-8 w-full max-w-6xl">
+      <div className="flex flex-col md:flex-row gap-8 w-full max-w-5xl">
         
-        {/* Score Box with Title */}
-        <div className="flex-1 bg-white/20 p-8 rounded-xl shadow-xl text-center">
-          <h1 className="text-3xl font-bold text-amber-300 mb-6">Your Productivity Score</h1>
-          <div className="text-5xl font-extrabold text-yellow-300 mb-4">{score} / 100</div>
-          <p className="text-lg mb-6">{recommendation}</p>
+        <div className="flex-1 bg-white/20 p-6 rounded-xl shadow-2xl backdrop-blur-md text-center hover:scale-105 transition-transform duration-300">
+          <h1 className="text-2xl font-bold text-amber-300 mb-4">Your Productivity Score</h1>
+          <div className="text-4xl font-extrabold text-yellow-300 mb-2">{score} / 100</div>
+          <p className="text-md mb-4">{recommendation}</p>
           <button
             onClick={signOut}
-            className="bg-red-500 hover:bg-red-600 px-6 py-2 rounded-md font-semibold text-white"
+            className="bg-red-500 hover:bg-red-600 px-5 py-2 rounded-md font-semibold text-white"
           >
             🚪 Sign Out
           </button>
         </div>
 
-        {/* Goal Tracker Box with Title */}
-        <div className="flex-1 bg-white/20 p-8 rounded-xl shadow-xl">
-          <h2 className="text-3xl font-bold text-amber-300 mb-6 text-center">🎯 Weekly Goal Tracker</h2>
+        <div className="flex-1 bg-white/20 p-6 rounded-xl shadow-2xl backdrop-blur-md hover:scale-105 transition-transform duration-300">
+          <h2 className="text-2xl font-bold text-amber-300 mb-4 text-center">🎯 Weekly Goal Tracker</h2>
           <GoalTrackerForm />
         </div>
+      </div>
+
+      <div className="w-full max-w-2xl mt-4 p-4 bg-white/10 rounded-xl shadow-xl border border-amber-300 hover:border-amber-500 backdrop-blur-md transition-all duration-300 hover:shadow-[0_0_20px_4px_rgba(255,191,0,0.4)]">
+        <ChatForm />
       </div>
     </div>
   );
