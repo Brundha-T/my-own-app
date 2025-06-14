@@ -1,21 +1,36 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Head from 'next/head';
+import { db } from '../lib/firebase';
+import { collection, addDoc } from 'firebase/firestore';
 
 export default function Home() {
   const router = useRouter();
   const [username, setUsername] = useState('');
   const [loginMessage, setLoginMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const enteredUsername = e.target.username.value;
-    setUsername(enteredUsername);
-    setLoginMessage(`${enteredUsername} logged in`);
+    const enteredAge = parseInt(e.target.age.value);
 
-    setTimeout(() => {
-      router.push('/dashboard');
-    }, 1000);
+    try {
+      // Store username and age in Firestore
+      await addDoc(collection(db, 'users'), {
+        username: enteredUsername,
+        age: enteredAge,
+        createdAt: new Date()
+      });
+
+      setUsername(enteredUsername);
+      setLoginMessage(`${enteredUsername} signed up`);
+
+      setTimeout(() => {
+        router.push('/dashboard');
+      }, 1000);
+    } catch (error) {
+      console.error("Error adding user to Firestore: ", error);
+    }
   };
 
   return (
@@ -50,6 +65,7 @@ export default function Home() {
             <input
               type="text"
               id="username"
+              name="username"
               placeholder="Username"
               required
               minLength="3"
@@ -66,6 +82,7 @@ export default function Home() {
             <input
               type="number"
               id="age"
+              name="age"
               placeholder="Age"
               required
               min="10"
@@ -84,7 +101,6 @@ export default function Home() {
               ✅ {loginMessage}
             </p>
           )}
-
         </div>
 
         <footer className="mt-auto bg-black/70 text-center py-4 text-sm text-gray-300">
