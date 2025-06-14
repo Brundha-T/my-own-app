@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import MotivationForm from '../components/MotivationForm';
+import { db } from '../lib/firebase';
+
 
 export default function Dashboard() {
   const [tasks, setTasks] = useState([]);
